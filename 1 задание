@@ -1,0 +1,35 @@
+zoo/
+ ├── Zoo.java                         // Возможно, класс-фасад или основной класс игры.
+ ├── IInteractable.java               // Общий интерфейс для объектов, с которыми можно взаимодействовать.
+ ├── utils/
+ │    └── ZooUtils.java               // Утилитные методы
+ ├── animals/
+ │    ├── Animal.java                 // Абстрактный класс животного
+ │    ├── Mammal.java                 // Абстрактный класс млекопитающего (если нужно)
+ │    ├── Bird.java                   // Абстрактный класс птицы (если нужно)
+ │    ├── interfaces/
+ │    │    ├── IFlyable.java          // Интерфейс для летающих
+ │    │    ├── ISwimmable.java        // Интерфейс для плавающих
+ │    │    ├── ICarnivorous.java      // Интерфейс для хищников
+ │    │    ├── IHerbivorous.java      // Интерфейс для травоядных
+ │    ├── Lion.java                   // Конкретное животное Лев
+ │    ├── Elephant.java               // Конкретное животное Слон
+ │    ├── Penguin.java                // Пингвин (реализует ISwimmable)
+ │    └── Eagle.java                  // Орел (реализует IFlyable)
+ │
+ ├── enclosures/
+ │    ├── Enclosure.java              // Абстрактный класс вольера
+ │    ├── Aviary.java                 // Вольер для птиц
+ │    ├── Aquarium.java               // Аквариум для рыб или морских животных
+ │    ├── LionEnclosure.java          // Специализированный вольер для львов
+ │    └── Terrarium.java              // Террариум для рептилий
+ │
+ ├── staff/
+ │    ├── StaffMember.java            // Абстрактный класс сотрудника
+ │    ├── Zookeeper.java              // Смотритель зоопарка
+ │    ├── Veterinarian.java           // Ветеринар
+ │    └── Guide.java                  // Гид
+ │
+ └── visitors/
+      ├── Visitor.java                // Посетитель зоопарка
+      └── Ticket.java                 // Билет для посетителя, если нужно
