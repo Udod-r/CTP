@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class SimpleCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите арифметическое выражение (например, 2 * 6.5): ");
+        String expression = scanner.nextLine();
+        
+        try {
+            double result = calculate(expression);
+            System.out.println("Результат: " + result);
+        } catch (Exception e) {
+            System.out.println("Ошибка: " + e.getMessage());
+        }
+    }
+
+    private static double calculate(String expression) throws Exception {
+        // Удаляем пробелы
+        expression = expression.replace(" ", "");
+
+        // Разделяем строку по операторам
+        String[] operators = {"+", "-", "*", "/"};
+        for (String operator : operators) {
+            if (expression.contains(operator)) {
+                String[] parts = expression.split("\\Q" + operator + "\\E");
+                double left = Double.parseDouble(parts[0]);
+                double right = Double.parseDouble(parts[1]);
+                
+                switch (operator) {
+                    case "+":
+                        return left + right;
+                    case "-":
+                        return left - right;
+                    case "*":
+                        return left * right;
+                    case "/":
+                        if (right == 0) throw new Exception("Деление на ноль");
+                        return left / right;
+                }
+            }
+        }
+        
+        throw new Exception("Неверное арифметическое выражение");
+    }
+}
