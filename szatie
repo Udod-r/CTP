@@ -1,0 +1,41 @@
+import java.io.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Decompress {
+    public static void main(String[] args) {
+        String inputFile = "compressed.txt"; // Сжатый файл
+        String outputFile = "decompressed.txt"; // Распакованный файл
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
+            
+            String line;
+            while ((line = reader.readLine()) != null) {
+                writer.write(decompressLine(line));
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static String decompressLine(String line) {
+        StringBuilder output = new StringBuilder();
+        Pattern pattern = Pattern.compile("(\\D)(\\d+)"); // Регулярное выражение для поиска символов с их количеством
+        Matcher matcher = pattern.matcher(line);
+
+        int lastEnd = 0;
+        while (matcher.find()) {
+            String charToRepeat = matcher.group(1);
+            int count = Integer.parseInt(matcher.group(2));
+            output.append(charToRepeat.repeat(count));
+            lastEnd = matcher.end();
+        }
+        // Добавляем оставшуюся часть строки, если есть
+        if (lastEnd < line.length()) {
+            output.append(line.substring(lastEnd));
+        }
+        return output.toString();
+    }
+}
