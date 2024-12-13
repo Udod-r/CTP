@@ -1,0 +1,42 @@
+import java.util.Scanner;
+
+public class CompoundInterestCalculator {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Ввод данных для сложного процента
+        System.out.print("Введите начальную сумму (Число1): ");
+        double principal = scanner.nextDouble();
+
+        System.out.print("Введите процент (в виде десятичной дроби, например, 5% = 0.05): ");
+        double rate = scanner.nextDouble();
+
+        System.out.print("Введите количество периодов (N): ");
+        int periods = scanner.nextInt();
+
+        // Вычисление сложного процента
+        double amount = calculateCompoundInterest(principal, rate, periods);
+        System.out.printf("Сумма после %d периодов: %.2f\n", periods, amount);
+
+        // Обратное действие
+        System.out.print("Введите конечную сумму (Число2): ");
+        double finalAmount = scanner.nextDouble();
+
+        double requiredRate = calculateRequiredRate(principal, finalAmount, periods);
+        System.out.printf("Необходимый процент, чтобы от %.2f дойти до %.2f за %d периодов: %.2f\n", 
+                          principal, finalAmount, periods, requiredRate * 100); // Умножаем на 100 для процента
+
+        scanner.close();
+    }
+
+    // Метод для вычисления сложного процента
+    private static double calculateCompoundInterest(double principal, double rate, int periods) {
+        return principal * Math.pow(1 + rate, periods);
+    }
+
+    // Метод для вычисления необходимого процента
+    private static double calculateRequiredRate(double principal, double finalAmount, int periods) {
+        return Math.pow(finalAmount / principal, 1.0 / periods) - 1;
+    }
+}
