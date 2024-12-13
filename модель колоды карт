@@ -1,0 +1,33 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        Deck deck = new Deck();
+        System.out.println("Исходная колода: " + deck);
+
+        // Перетасовать колоду
+        deck.shuffle();
+        System.out.println("Перетасованная колода: " + deck);
+
+        // Сдать карты
+        List<Card> hand = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            Card card = deck.draw();
+            if (card != null) {
+                hand.add(card);
+            }
+        }
+        System.out.println("Сданные карты: " + hand);
+        System.out.println("Оставшиеся карты в колоде: " + deck.size());
+
+        // Вернуть одну карту в колоду
+        if (deck.returnCard(hand.get(0))) {
+            System.out.println("Карта возвращена: " + hand.get(0));
+        } else {
+            System.out.println("Эта карта уже есть в колоде.");
+        }
+
+        System.out.println("Проверка размера колоды после возврата: " + deck.size());
+    }
+}
