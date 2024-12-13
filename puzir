@@ -1,0 +1,41 @@
+import java.util.Arrays;
+
+public class BubbleSortExample {
+    public static void main(String[] args) {
+        int[] array = {64, 34, 25, 12, 22, 11, 90}; // Пример массива для сортировки
+
+        System.out.println("Исходный массив: " + Arrays.toString(array));
+        
+        bubbleSort(array); // Вызов метода сортировки
+        
+        System.out.println("Отсортированный массив: " + Arrays.toString(array));
+    }
+
+    // Метод сортировки пузырьком
+    public static void bubbleSort(int[] array) {
+        int n = array.length;
+        boolean swapped;
+
+        // Проходим по всем элементам массива
+        for (int i = 0; i < n - 1; i++) {
+            swapped = false; // Сброс флага
+
+            // Последний i элементов уже на своих местах
+            for (int j = 0; j < n - 1 - i; j++) {
+                // Сравниваем соседние элементы
+                if (array[j] > array[j + 1]) {
+                    // Меняем местами, если они находятся в неправильном порядке
+                    int temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                    swapped = true; // Установим флаг, что была перестановка
+                }
+            }
+
+            // Если за проход не было перестановок, массив уже отсортирован
+            if (!swapped) {
+                break;
+            }
+        }
+    }
+}
